@@ -183,7 +183,7 @@ class CFrame extends JFrame implements ActionListener{
 	protected int loop = 1;
 
 	CFrame(){
-		super("Othello Interface @ NDHU AILab");
+		super("Othello Interface");
 		setSize(650, 520);
 		setResizable(false);
 		setVisible(true);
