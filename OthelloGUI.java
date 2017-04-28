@@ -191,6 +191,7 @@ class CFrame extends JFrame implements ActionListener{
 
 		initUI();
 		initGame();
+        initTime();
 		saveGame("board.txt");
 		initPlayer();
 		updateBoard();
@@ -210,11 +211,13 @@ class CFrame extends JFrame implements ActionListener{
 		moveSeq = new int[row * row * 2];
 		strMoveSeq = new String[1];
 		strMoveSeq[0] = "---";
+	}
 
-		whiteTime = 0;
+    protected void initTime(){
+        whiteTime = 0;
 		blackTime = 0;
 		startTime = System.currentTimeMillis();
-	}
+    }
 
 	/* Player and computer player setings */
 	protected void initPlayer(){
@@ -398,6 +401,7 @@ class CFrame extends JFrame implements ActionListener{
 			JFileChooser chooser = new JFileChooser();
 			if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
 				initGame();
+                initTime();
 				initPlayer();
 				initCount();
 				readGame(chooser.getSelectedFile().getPath());

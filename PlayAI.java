@@ -69,6 +69,7 @@ class PlayAI implements Runnable{
             loop--;
             if(loop > 0){
                 gameUI.initGame();
+                gameUI.initTime();
     			gameUI.saveGame("board.txt");
     			gameUI.updateBoard();
             }

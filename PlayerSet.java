@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 public class PlayerSet extends JFrame implements ActionListener{
     JLabel lblOne, lblTwo, lblLoop;
+    JCheckBox chkClear;
     JTextField txtCmdOne, txtCmdTwo, txtLoop;
     JRadioButton radHumanOne, radComputerOne, radHumanTwo, radComputerTwo;
     ButtonGroup groupOne, groupTwo;
@@ -63,6 +64,11 @@ public class PlayerSet extends JFrame implements ActionListener{
         txtLoop.setBounds(140, 140, 100, 20);
         add(txtLoop);
 
+        chkClear = new JCheckBox("Clear board");
+        chkClear.setBounds(20, 170, 130, 20);
+        chkClear.setSelected(true);
+        add(chkClear);
+
         btnOk = new JButton("Start");
         btnOk.setBounds(160, 170, 80, 30);
         btnOk.addActionListener(this);
@@ -114,7 +120,12 @@ public class PlayerSet extends JFrame implements ActionListener{
             }
             super.dispose();
             // make game interface to start a new game
-            gameUI.initGame();
+            // if "Clear board" checkbox is not selceted, will keep current board status
+            // useful when load an exist game
+            if(chkClear.isSelected()){
+                gameUI.initGame();
+            }
+            gameUI.initTime();
 			gameUI.initCount();
 			gameUI.saveGame("board.txt");
 			gameUI.updateBoard();
