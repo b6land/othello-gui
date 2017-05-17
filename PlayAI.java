@@ -23,6 +23,11 @@ class PlayAI implements Runnable{
                 // run and wait computer player's calculate
                 try{
                     Process process = Runtime.getRuntime().exec(gameUI.cmd[gameUI.turn + 1]);
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+	                    System.out.println(line);
+                    }
                     process.waitFor();
                 }catch(InterruptedException e){
                     JOptionPane.showMessageDialog(null, "Process Interrupt Error !!", "Error", JOptionPane.ERROR_MESSAGE);

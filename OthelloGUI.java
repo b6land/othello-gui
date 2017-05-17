@@ -161,7 +161,7 @@ class CFrame extends JFrame implements ActionListener{
 	JButton[] btnDisk;
 	JTextField txtDiskNum;
 	JToolBar barAction;
-	JButton btnNew, btnLoad, btnSave, btnPass;
+	JButton btnNew, btnLoad, btnSave, btnPass, btnDeepLearning;
 	JLabel lblNowPlay, lblWhiteWin, lblBlackWin, lblRound, lblWhiteTime, lblBlackTime;
 	JLabel[] lblRow;
 	JLabel[] lblCol;
@@ -182,6 +182,9 @@ class CFrame extends JFrame implements ActionListener{
 	protected String[] cmd;
 	protected int loop = 1;
 
+    // Get the name of Operating System
+    private static String OS = System.getProperty("os.name").toLowerCase();
+
 	CFrame(){
 		super("Othello Interface");
 		setSize(650, 520);
@@ -191,11 +194,20 @@ class CFrame extends JFrame implements ActionListener{
 
 		initUI();
 		initGame();
+        isLinux();
         initTime();
 		saveGame("board.txt");
 		initPlayer();
 		updateBoard();
 	}
+
+    protected void isLinux(){
+        System.out.println(OS);
+
+        if(OS.indexOf("linux") >= 0){
+
+        }
+    }
 
 	protected void initCount(){
 		whiteWin = 0;
@@ -242,10 +254,13 @@ class CFrame extends JFrame implements ActionListener{
 		btnSave.addActionListener(this);
 		btnPass = new JButton("Human Pass");
 		btnPass.addActionListener(this);
+        btnDeepLearning = new JButton("New Deep Learning Game");
+        btnDeepLearning.addActionListener(this);
 		barAction.add(btnNew);
 		barAction.add(btnLoad);
 		barAction.add(btnSave);
 		barAction.add(btnPass);
+        barAction.add(btnDeepLearning);
 		add(barAction, BorderLayout.NORTH);
 
 		// board panel
@@ -415,6 +430,9 @@ class CFrame extends JFrame implements ActionListener{
 				saveGame(chooser.getSelectedFile().getPath());
 			}
 		}
+        else if(e.getSource() == btnDeepLearning){
+            // TODO : player and deep learning program settings
+        }
 		else if(e.getSource() == btnPass){
 			switchPlayer(-1);
 			saveGame("board.txt");
