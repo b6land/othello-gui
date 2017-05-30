@@ -161,7 +161,7 @@ class CFrame extends JFrame implements ActionListener{
 	JButton[] btnDisk;
 	JTextField txtDiskNum;
 	JToolBar barAction;
-	JButton btnNew, btnLoad, btnSave, btnPass, btnDeepLearning;
+	JButton btnNew, btnLoad, btnSave, btnPass, btnScriptPlay;
 	JLabel lblNowPlay, lblWhiteWin, lblBlackWin, lblRound, lblWhiteTime, lblBlackTime;
 	JLabel[] lblRow;
 	JLabel[] lblCol;
@@ -254,13 +254,13 @@ class CFrame extends JFrame implements ActionListener{
 		btnSave.addActionListener(this);
 		btnPass = new JButton("Human Pass");
 		btnPass.addActionListener(this);
-        btnDeepLearning = new JButton("New Deep Learning Game");
-        btnDeepLearning.addActionListener(this);
+        btnScriptPlay = new JButton("New Script Game");
+        btnScriptPlay.addActionListener(this);
 		barAction.add(btnNew);
 		barAction.add(btnLoad);
 		barAction.add(btnSave);
 		barAction.add(btnPass);
-        barAction.add(btnDeepLearning);
+        barAction.add(btnScriptPlay);
 		add(barAction, BorderLayout.NORTH);
 
 		// board panel
@@ -430,8 +430,8 @@ class CFrame extends JFrame implements ActionListener{
 				saveGame(chooser.getSelectedFile().getPath());
 			}
 		}
-        else if(e.getSource() == btnDeepLearning){
-            // TODO : player and deep learning program settings
+        else if(e.getSource() == btnScriptPlay){
+            ScriptPlay window = new ScriptPlay(this);
         }
 		else if(e.getSource() == btnPass){
 			switchPlayer(-1);
@@ -535,6 +535,12 @@ class CFrame extends JFrame implements ActionListener{
 		Thread play = new Thread(ai);
 		play.start();
 	}
+
+    protected void playScriptAI(int loop){
+        ScriptPlayAI ai = new ScriptPlayAI(this, loop);
+		Thread play = new Thread(ai);
+		play.start();
+    }
 
 	protected void setCount(Game.Result r){
 		if(r == Game.Result.BLACK_WIN){

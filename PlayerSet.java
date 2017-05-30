@@ -135,7 +135,7 @@ public class PlayerSet extends JFrame implements ActionListener{
                 gameUI.playAI(gameUI.loop);
             }
             // if black player is computer, then call the computer first
-            else if(gameUI.p[2] == Const.Player.COMPUTER){
+            else if(gameUI.p[2] == Const.Player.COMPUTER || gameUI.p[0] == Const.Player.COMPUTER){
                 gameUI.playAI(1);
             }
         }
